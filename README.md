@@ -1,6 +1,8 @@
 # mgweb
 go语言编写的 mongodb web管理工具
 
+项目使用beego框架实现
+
 ## 项目依赖
 项目基于beego,mgo等项目，使用时需提前安装依赖库
 
