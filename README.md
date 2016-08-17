@@ -19,3 +19,8 @@ $ ./mgweb
 服务端口
 
 每页显示数据条数
+
+##登录
+mongouri 格式如下：
+
+user:password@ip:port/db 
