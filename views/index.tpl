@@ -25,6 +25,8 @@ jQuery.fn.extend({
   PageClick:function(pageclickednumber){
     page = pageclickednumber;
     if(db =="" || c=="")return;
+    $("#table").html("<div class='text-center'><img src='/static/img/wait.gif'/></div>");
+    $("#pager").html("");
     $.ajax({
       type: "POST",
       url: "/?db="+db+"&c="+c+"&page="+page,

@@ -8,7 +8,7 @@
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">MongoUri</label>
       <div class="col-lg-10">
-        <input type="password" class="form-control" id="uri" name="uri" placeholder="user:passwd@127.0.0.1:27017/test">
+        <input type="text" class="form-control" id="uri" name="uri" placeholder="user:passwd@127.0.0.1:27017/test">
       </div>
     </div>
     <div class="form-group">

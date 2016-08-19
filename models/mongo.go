@@ -1,7 +1,7 @@
 package models
 
 import (
-        "fmt"
+        //"fmt"
 	//"log"
         "gopkg.in/mgo.v2"
         //"gopkg.in/mgo.v2/bson"
@@ -31,13 +31,15 @@ func Datas(uri, db string, c string, page int, pagesize int)( []map[string]inter
         defer session.Close()
         session.SetMode(mgo.Monotonic, true)
         collection := session.DB(db).C(c)
-        var result map[string]interface{}
+        //var result map[string]interface{}
         var items []map[string]interface{}
-        iter := collection.Find(nil).Skip((page-1)*pagesize).Limit(pagesize).Iter()
+        //iter := collection.Find(nil).Skip((page-1)*pagesize).Limit(pagesize).Iter()
+        collection.Find(nil).Skip((page-1)*pagesize).Limit(pagesize).All(&items)
+        //fmt.Printf("%v",items)
         dataCount, _ := collection.Find(nil).Count()
-        for iter.Next(&result) {
+        /*for iter.Next(&result) {
                 fmt.Printf("Result: %v\n", result)
-                items =append(items, result)
-        }
-        return items,result,dataCount,dataCount / pagesize
+                items =append(items, result.Clone())
+        }*/
+        return items,items[0],dataCount,dataCount / pagesize
 }
