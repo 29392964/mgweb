@@ -41,5 +41,69 @@ func Datas(uri, db string, c string, page int, pagesize int)( []map[string]inter
                 fmt.Printf("Result: %v\n", result)
                 items =append(items, result.Clone())
         }*/
-        return items,items[0],dataCount,dataCount / pagesize
+        if dataCount >0 {
+                return items,items[0],dataCount,dataCount / pagesize
+        }else {
+                return items,nil,dataCount,dataCount / pagesize
+        }
+}
+
+func Insert(uri, db, c string,data interface{}) bool {
+        session, err := mgo.Dial(uri)
+        if err != nil {
+                panic(err)
+        }
+        defer session.Close()
+        session.SetMode(mgo.Monotonic, true)
+        collection := session.DB(db).C(c)
+        _err := collection.Insert(data)
+        return _err ==nil
+}
+
+func Index(uri, db, c string,keys []string) bool {
+        session, err := mgo.Dial(uri)
+        if err != nil {
+                panic(err)
+        }
+        defer session.Close()
+        session.SetMode(mgo.Monotonic, true)
+        collection := session.DB(db).C(c)
+        _err := collection.EnsureIndex(mgo.Index{Key: keys})
+        return _err ==nil
+}
+
+func Update(uri, db, c string,filter,data interface{}) bool {
+        session, err := mgo.Dial(uri)
+        if err != nil {
+                panic(err)
+        }
+        defer session.Close()
+        session.SetMode(mgo.Monotonic, true)
+        collection := session.DB(db).C(c)
+        _err := collection.Update(filter,data)
+        return _err ==nil
+}
+
+func Remove(uri, db, c string,data interface{}) bool {
+        session, err := mgo.Dial(uri)
+        if err != nil {
+                panic(err)
+        }
+        defer session.Close()
+        session.SetMode(mgo.Monotonic, true)
+        collection := session.DB(db).C(c)
+        _err := collection.Remove(data)
+        return _err ==nil
+}
+
+func Drop(uri, db, c string) bool {
+        session, err := mgo.Dial(uri)
+        if err != nil {
+                panic(err)
+        }
+        defer session.Close()
+        session.SetMode(mgo.Monotonic, true)
+        collection := session.DB(db).C(c)
+        _err := collection.DropCollection()
+        return _err ==nil
 }

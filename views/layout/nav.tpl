@@ -26,6 +26,16 @@
             {{end}}
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Operations <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#" url="insert" class="op">Insert</a></li>
+            <li><a href="#" url="index" class="op">Index</a></li>
+            <li><a href="#" url="update" class="op">Update</a></li>
+            <li><a href="#" url="remove" class="op">Remove</a></li>
+            <li><a href="#" url="drop" class="op">Drop</a></li>
+          </ul>
+        </li>
       </ul>
       <!--
       <form class="navbar-form navbar-left" role="search">

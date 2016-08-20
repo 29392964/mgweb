@@ -37,10 +37,23 @@ jQuery.fn.extend({
         $("#pager").pager({ pagenumber: page, pagecount: pCount, buttonClickCallback: $(this).PageClick });
       }
     })
+  },
+  OpenInPage:function(url){
+    $("#table").html("<div class='text-center'><img src='/static/img/wait.gif'/></div>");
+    $("#pager").html("");
+    $.ajax({
+      type: "GET",
+      url: url,
+      cache: false,
+      success: function(html){
+        $("#table").html(html);
+        //$("#pager").pager({ pagenumber: page, pagecount: pCount, buttonClickCallback: $(this).PageClick });
+      }
+    })
   }
 });
 $(document).ready(function(){
-  $(this).PageClick(3);
+  //$(this).PageClick(3);
   $(".dropdown-menu").delegate(".sdb","click",function(){
     db=$(this).text();
     $(this).PageClick(1);
@@ -49,5 +62,14 @@ $(document).ready(function(){
     c=$(this).text();
     $(this).PageClick(1);
   });
+  $("li").undelegate(); 
+  $("li").delegate(".op","click",function(){
+    url=$(this).attr("url");
+    $(this).OpenInPage(url);
+  });
+  $("#table").delegate(".btn-primary","click",function(){
+    return confirm("Are you sure??");
+  });
+  
 });
 {{end}}
