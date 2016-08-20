@@ -30,7 +30,5 @@ http://no3g.com:8080
 
 ##使用golang docker交叉编译
 docker run -it -v /Users/yuecaili/Documents/work/golang:/usr/src/myapp  -w /usr/src/myapp golang:1.7 bash
-
 export GOPATH="/usr/src/myapp"
-
 go build
