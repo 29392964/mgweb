@@ -53,7 +53,7 @@ jQuery.fn.extend({
   }
 });
 $(document).ready(function(){
-  //$(this).PageClick(3);
+  $(this).PageClick(1);
   $(".dropdown-menu").delegate(".sdb","click",function(){
     db=$(this).text();
     $(this).PageClick(1);

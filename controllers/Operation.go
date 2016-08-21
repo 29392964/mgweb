@@ -26,18 +26,23 @@ type DropController struct {
 }
 
 func (this *InsertController) Get() {
+        this.Data["c"] = this.GetSession("c")
         this.TplName = "operation/insert.tpl"
 }
 func (this *IndexController) Get() {
+        this.Data["c"] = this.GetSession("c")
         this.TplName = "operation/index.tpl"
 }
 func (this *UpdateController) Get() {
+        this.Data["c"] = this.GetSession("c")
         this.TplName = "operation/update.tpl"
 }
 func (this *RemoveController) Get() {
+        this.Data["c"] = this.GetSession("c")
         this.TplName = "operation/remove.tpl"
 }
 func (this *DropController) Get() {
+        this.Data["c"] = this.GetSession("c")
         this.TplName = "operation/drop.tpl"
 }
 

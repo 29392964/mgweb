@@ -22,11 +22,13 @@ func (this *MainController) Prepare() {
 
 func (this *MainController) Get() {
         this.Data["db"], this.Data["Collections"] = this.db, models.Collections(this.uri,this.db)
+        this.SetSession("c","")       
 	this.TplName = "index.tpl"
 }
 
 func (this *MainController) Post(){
         collection := this.Input().Get("c")
+        this.SetSession("c",collection)       
         page, _ := strconv.Atoi(this.Input().Get("page")) 
         pagesize,_ := beego.AppConfig.Int("pagesize")
         this.Data["Datas"],this.Data["Datas1"],this.Data["Count"],this.Data["PageCount"] = models.Datas(this.uri,this.db,collection,page,pagesize)
