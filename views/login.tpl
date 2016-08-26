@@ -21,4 +21,5 @@
 </form>
 {{end}}
 {{define "layout/js.tpl"}}
+$("#pager").html("");
 {{end}}

@@ -15,13 +15,15 @@ type MainController struct {
 func (this *MainController) Prepare() {
     if this.GetSession("uri") == nil || this.GetSession("db") == nil {
         this.Redirect("/login", 302)
+    } else {
+        this.uri,this.db = this.GetSession("uri").(string),this.GetSession("db").(string)
     }
-    this.uri,this.db = this.GetSession("uri").(string),this.GetSession("db").(string)
 }
 
 
 func (this *MainController) Get() {
         this.Data["db"], this.Data["Collections"] = this.db, models.Collections(this.uri,this.db)
+        this.Data["Tables"],_,_,_ = models.Datas(this.uri,this.db,"tables",1,100)
         this.SetSession("c","")       
 	this.TplName = "index.tpl"
 }

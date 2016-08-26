@@ -36,6 +36,16 @@
             <li><a href="#" url="drop" class="op">Drop</a></li>
           </ul>
         </li>
+        <!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tables <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            {{range $index, $elem := .Tables}}
+            <li><a href="#" class="tb">{{index $elem "tb"}}</a></li>
+            {{end}}
+          </ul>
+        </li>
+        -->
       </ul>
       <!--
       <form class="navbar-form navbar-left" role="search">
