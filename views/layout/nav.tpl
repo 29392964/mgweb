@@ -12,12 +12,15 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
+        <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">DB <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#" class="sdb">{{.db}}</a></li>
           </ul>
         </li>
+        -->
+        <li><a href="#" class="sdb">[DB:{{.db}}]</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Collection <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -26,6 +29,8 @@
             {{end}}
           </ul>
         </li>
+        <li class="pull-right"><a href="#" id="newc" class="text-info" data-toggle="modal" data-target="#modalinsert" data-c="{{.Collection}}">New collection</a></li>
+        <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Operations <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -36,7 +41,6 @@
             <li><a href="#" url="drop" class="op">Drop</a></li>
           </ul>
         </li>
-        <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tables <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -45,6 +49,7 @@
             {{end}}
           </ul>
         </li>
+        <li><a href="#">new collection</a></li>
         -->
       </ul>
       <!--

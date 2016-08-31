@@ -53,6 +53,7 @@ jQuery.fn.extend({
   }
 });
 $(document).ready(function(){
+  reload = false;
   $(this).PageClick(1);
   $(".dropdown-menu").delegate(".sdb","click",function(){
     db=$(this).text();
@@ -67,9 +68,66 @@ $(document).ready(function(){
     url=$(this).attr("url");
     $(this).OpenInPage(url);
   });
+  //窗口事件
+  $("#table").delegate("a[data-target='#modalinsert']","click",function(){
+    $("#modalinsert").find("#c").val($(this).attr("data-c"));
+  })
+  $("#table").delegate("a[data-target='#modaldrop']","click",function(){
+    $("#modaldrop").find("#c").val($(this).attr("data-c"));
+  })
+  $("#table").delegate("a[data-target='#modalupdate']","click",function(){
+    $("#modalupdate").find("#c").val($(this).attr("data-c"));
+    $("#modalupdate").find("#filter").val("{\"_id\":"+$(this).attr("data-id")+"}");
+    $("#modalupdate").find("#json").val("{\"$set\":{\"\":\"\"}}");
+  })
+  $("#table").delegate("a[data-target='#modalremove']","click",function(){
+    $("#modalremove").find("#c").val($(this).attr("data-c"));
+    $("#modalremove").find("#filter").val("{\"_id\":"+$(this).attr("data-id")+"}");
+  })
+  $("#newc").click(function(){
+    reload = true;
+  })
+  //操作按钮事件,通过ajax提交 
+  $(".modal-footer").delegate("#btninsert","click",function(){
+    c=$(this).parent().parent().find("#c").val()
+    j=$(this).parent().parent().find("#json").val()
+    $.post("/insert",{c:c,json:j},function(result){
+      $('.modal').modal('hide');
+      $(this).PageClick(1);
+      if(reload){
+        location.reload();
+      }
+    });
+  })
+  $(".modal-footer").delegate("#btndrop","click",function(){
+    c=$(this).parent().parent().find("#c").val()
+    $.post("/drop",{c:c},function(result){
+      $('.modal').modal('hide');
+      location.reload() 
+    });
+  })
+  $(".modal-footer").delegate("#btnupdate","click",function(){
+    c=$(this).parent().parent().find("#c").val()
+    f=$(this).parent().parent().find("#filter").val()
+    j=$(this).parent().parent().find("#json").val()
+    $.post("/update",{c:c,filter:f,json:j},function(result){
+      $('.modal').modal('hide');
+      $(this).PageClick(1);
+    });
+  })
+  $(".modal-footer").delegate("#btnremove","click",function(){
+    c=$(this).parent().parent().find("#c").val()
+    f=$(this).parent().parent().find("#filter").val()
+    $.post("/remove",{c:c,json:f},function(result){
+      $('.modal').modal('hide');
+      $(this).PageClick(1);
+    });
+  })
+
+/*
   $("#table").delegate(".btn-primary","click",function(){
     return confirm("Are you sure??");
   });
-  
+*/  
 });
 {{end}}
