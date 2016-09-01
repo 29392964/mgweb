@@ -29,7 +29,9 @@
             {{end}}
           </ul>
         </li>
+        {{if .Editable}}
         <li class="pull-right"><a href="#" id="newc" class="text-info" data-toggle="modal" data-target="#modalinsert" data-c="{{.Collection}}">New collection</a></li>
+        {{end}}
         <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Operations <span class="caret"></span></a>

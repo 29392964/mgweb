@@ -11,6 +11,7 @@ type MainController struct {
 	beego.Controller
         uri string
         db string
+        editable bool
 }
 
 func (this *MainController) Prepare() {
@@ -18,6 +19,7 @@ func (this *MainController) Prepare() {
         this.Redirect("/login", 302)
     } else {
         this.uri,this.db = this.GetSession("uri").(string),this.GetSession("db").(string)
+        this.editable,_ = beego.AppConfig.Bool("editable")        
     }
 }
 
@@ -26,6 +28,7 @@ func (this *MainController) Get() {
         this.Data["db"], this.Data["Collections"] = this.db, models.Collections(this.uri,this.db)
         this.Data["Tables"],_,_,_ = models.Datas(this.uri,this.db,"tables",nil,1,100)
         this.SetSession("c","")       
+        this.Data["Editable"] = this.editable
 	this.TplName = "index.tpl"
 }
 
@@ -40,5 +43,6 @@ func (this *MainController) Post(){
         pagesize,_ := beego.AppConfig.Int("pagesize")
         this.Data["Datas"],this.Data["Datas1"],this.Data["Count"],this.Data["PageCount"] = models.Datas(this.uri,this.db,collection,f,page,pagesize)
         this.Data["Db"],this.Data["Collection"] = this.db, collection
+        this.Data["Editable"] = this.editable
         this.TplName = "layout/table.tpl"
 }

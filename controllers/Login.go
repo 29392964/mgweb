@@ -18,6 +18,10 @@ func (this *LoginController) Get() {
 func (this *LoginController) Post() {
         uri := this.GetString("uri")
         if uri != "" {
+            cnfuri := beego.AppConfig.String(uri)
+            if cnfuri != "" {
+                uri = cnfuri
+            }
             if models.Check(uri) {
                 index := strings.LastIndex(uri,"/")
                 if index > 0 {

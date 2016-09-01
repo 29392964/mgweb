@@ -20,6 +20,10 @@ $ ./mgweb
 
 每页显示数据条数
 
+是否可编辑 editable
+
+连接串配置，如demo = 127.0.0.1/test 在登录时输入demo即可
+
 ##登录
 mongouri 格式如下：
 

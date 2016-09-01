@@ -9,6 +9,7 @@ type BaseController struct {
     beego.Controller
     uri string
     db string
+    editable bool
 }
 
 func (this *BaseController) Prepare() {
@@ -16,4 +17,5 @@ func (this *BaseController) Prepare() {
         this.Redirect("/login", 302)
     }
     this.uri,this.db = this.GetSession("uri").(string),this.GetSession("db").(string)
+    this.editable,_ = beego.AppConfig.Bool("editable")
 }
