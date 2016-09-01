@@ -24,7 +24,7 @@ func Collections(uri, db string) []string {
         return collections
 }
 
-func Datas(uri, db string, c string, page int, pagesize int)( []map[string]interface{}, map[string]interface{}, int, int) {
+func Datas(uri, db string, c string, f interface{}, page int, pagesize int)( []map[string]interface{}, map[string]interface{}, int, int) {
         session, err := mgo.Dial(uri)
         if err != nil {
                 panic(err)
@@ -32,12 +32,9 @@ func Datas(uri, db string, c string, page int, pagesize int)( []map[string]inter
         defer session.Close()
         session.SetMode(mgo.Monotonic, true)
         collection := session.DB(db).C(c)
-        //var result map[string]interface{}
         var items []map[string]interface{}
-        //iter := collection.Find(nil).Skip((page-1)*pagesize).Limit(pagesize).Iter()
-        collection.Find(nil).Skip((page-1)*pagesize).Limit(pagesize).All(&items)
-        //fmt.Printf("%v",items)
-        dataCount, _ := collection.Find(nil).Count()
+        collection.Find(f).Skip((page-1)*pagesize).Limit(pagesize).All(&items)
+        dataCount, _ := collection.Find(f).Count()
         /*for iter.Next(&result) {
                 fmt.Printf("Result: %v\n", result)
                 items =append(items, result.Clone())

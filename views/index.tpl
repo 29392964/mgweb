@@ -7,6 +7,7 @@ var ss="";
 var page=0;
 var db="prm";
 var c="";
+var filter="{}";
 var pCount=10;
 jQuery.fn.extend({
   doAjax: function() {
@@ -29,7 +30,7 @@ jQuery.fn.extend({
     $("#pager").html("");
     $.ajax({
       type: "POST",
-      url: "/?db="+db+"&c="+c+"&page="+page,
+      url: "/?db="+db+"&c="+c+"&page="+page+"&filter="+filter,
       data:ss,
       cache: false,
       success: function(html){
@@ -61,6 +62,7 @@ $(document).ready(function(){
   });
   $(".dropdown-menu").delegate(".sc","click",function(){
     c=$(this).text();
+    filter="{}";
     $(this).PageClick(1);
   });
   $("li").undelegate(); 
@@ -84,8 +86,12 @@ $(document).ready(function(){
     $("#modalremove").find("#c").val($(this).attr("data-c"));
     $("#modalremove").find("#filter").val("{\"_id\":"+$(this).attr("data-id")+"}");
   })
+  $("#table").delegate("a[data-target='#modalfind']","click",function(){
+    $("#modalfind").find("#c").val($(this).attr("data-c"));
+  })
   $("#newc").click(function(){
     reload = true;
+    $("#modalinsert").find("#c").val("");
   })
   //操作按钮事件,通过ajax提交 
   $(".modal-footer").delegate("#btninsert","click",function(){
@@ -122,6 +128,12 @@ $(document).ready(function(){
       $('.modal').modal('hide');
       $(this).PageClick(1);
     });
+  })
+  $(".modal-footer").delegate("#btnfind","click",function(){
+    c=$(this).parent().parent().find("#c").val()
+    filter=$(this).parent().parent().find("#filter").val()
+    $('.modal').modal('hide');
+    $(this).PageClick(1);    
   })
 
 /*
