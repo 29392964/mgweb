@@ -29,6 +29,10 @@ mongouri 格式如下：
 
 user:password@ip:port/db 
 
+如果在conf/app.conf中配置过，可使用 
+
+demo (或其他配置名称)
+
 #DEMO
 http://mgweb.no3g.com
 
