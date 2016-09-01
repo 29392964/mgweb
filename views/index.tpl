@@ -34,8 +34,12 @@ jQuery.fn.extend({
       data:ss,
       cache: false,
       success: function(html){
-        $("#table").html(html);
-        $("#pager").pager({ pagenumber: page, pagecount: pCount, buttonClickCallback: $(this).PageClick });
+        if(html.substr(0,2) == "<!"){
+            location.reload();
+        }else{
+            $("#table").html(html);
+            $("#pager").pager({ pagenumber: page, pagecount: pCount, buttonClickCallback: $(this).PageClick });
+        }
       }
     })
   },

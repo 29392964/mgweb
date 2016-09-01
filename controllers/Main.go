@@ -8,21 +8,8 @@ import (
 )
 
 type MainController struct {
-	beego.Controller
-        uri string
-        db string
-        editable bool
+        BaseController
 }
-
-func (this *MainController) Prepare() {
-    if this.GetSession("uri") == nil || this.GetSession("db") == nil {
-        this.Redirect("/login", 302)
-    } else {
-        this.uri,this.db = this.GetSession("uri").(string),this.GetSession("db").(string)
-        this.editable,_ = beego.AppConfig.Bool("editable")        
-    }
-}
-
 
 func (this *MainController) Get() {
         this.Data["db"], this.Data["Collections"] = this.db, models.Collections(this.uri,this.db)

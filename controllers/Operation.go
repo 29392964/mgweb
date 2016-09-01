@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
+	//"github.com/astaxie/beego"
         "mgweb/models"
         //"strconv"
         //"gopkg.in/mgo.v2/bson"
@@ -10,19 +10,24 @@ import (
 )
 
 type InsertController struct {
-	beego.Controller
+        BaseController
+	//beego.Controller
 }
 type IndexController struct {
-	beego.Controller
+        BaseController
+	//beego.Controller
 }
 type UpdateController struct {
-	beego.Controller
+        BaseController
+	//beego.Controller
 }
 type RemoveController struct {
-	beego.Controller
+        BaseController
+	//beego.Controller
 }
 type DropController struct {
-	beego.Controller
+        BaseController
+	//beego.Controller
 }
 
 func (this *InsertController) Get() {
