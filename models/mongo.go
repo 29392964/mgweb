@@ -5,7 +5,7 @@ import (
 	//"log"
         "gopkg.in/mgo.v2"
         "math"
-        //"gopkg.in/mgo.v2/bson"
+        "gopkg.in/mgo.v2/bson"
 )
 
 func Check(uri string) bool {
@@ -34,6 +34,11 @@ func Datas(uri, db string, c string, f interface{}, page int, pagesize int)( []m
         collection := session.DB(db).C(c)
         var items []map[string]interface{}
         collection.Find(f).Skip((page-1)*pagesize).Limit(pagesize).All(&items)
+        
+        for i,_ := range items {
+            items[i]["_id"] = items[i]["_id"].(bson.ObjectId).Hex()
+        }
+
         dataCount, _ := collection.Find(f).Count()
         /*for iter.Next(&result) {
                 fmt.Printf("Result: %v\n", result)

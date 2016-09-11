@@ -83,12 +83,12 @@ $(document).ready(function(){
   })
   $("#table").delegate("a[data-target='#modalupdate']","click",function(){
     $("#modalupdate").find("#c").val($(this).attr("data-c"));
-    $("#modalupdate").find("#filter").val("{\"_id\":"+$(this).attr("data-id")+"}");
+    $("#modalupdate").find("#filter").val("{\"_id\":\""+$(this).attr("data-id")+"\"}");
     $("#modalupdate").find("#json").val("{\"$set\":{\"\":\"\"}}");
   })
   $("#table").delegate("a[data-target='#modalremove']","click",function(){
     $("#modalremove").find("#c").val($(this).attr("data-c"));
-    $("#modalremove").find("#filter").val("{\"_id\":"+$(this).attr("data-id")+"}");
+    $("#modalremove").find("#filter").val("{\"_id\":\""+$(this).attr("data-id")+"\"}");
   })
   $("#table").delegate("a[data-target='#modalfind']","click",function(){
     $("#modalfind").find("#c").val($(this).attr("data-c"));

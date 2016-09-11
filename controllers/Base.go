@@ -15,7 +15,8 @@ type BaseController struct {
 func (this *BaseController) Prepare() {
     if this.GetSession("uri") == nil || this.GetSession("db") == nil {
         this.Redirect("/login", 302)
+    } else {
+        this.uri,this.db = this.GetSession("uri").(string),this.GetSession("db").(string)
+        this.editable,_ = beego.AppConfig.Bool("editable")
     }
-    this.uri,this.db = this.GetSession("uri").(string),this.GetSession("db").(string)
-    this.editable,_ = beego.AppConfig.Bool("editable")
 }

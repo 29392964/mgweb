@@ -5,6 +5,7 @@ import (
         "mgweb/models"
         "strconv"
         "encoding/json"
+        "gopkg.in/mgo.v2/bson"
 )
 
 type MainController struct {
@@ -26,6 +27,9 @@ func (this *MainController) Post(){
         b := []byte(s1)
         var f map[string]interface{}
         json.Unmarshal(b,&f)
+        if f["_id"] != nil{
+            f["_id"] =bson.ObjectIdHex( f["_id"].(string) )
+        }
         page, _ := strconv.Atoi(this.Input().Get("page")) 
         pagesize,_ := beego.AppConfig.Int("pagesize")
         this.Data["Datas"],this.Data["Datas1"],this.Data["Count"],this.Data["PageCount"] = models.Datas(this.uri,this.db,collection,f,page,pagesize)

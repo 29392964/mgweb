@@ -4,7 +4,7 @@ import (
 	//"github.com/astaxie/beego"
         "mgweb/models"
         //"strconv"
-        //"gopkg.in/mgo.v2/bson"
+        "gopkg.in/mgo.v2/bson"
         "encoding/json"
         "strings"
 )
@@ -90,6 +90,9 @@ func (this *UpdateController) Post(){
         b2 := []byte(s2)
         var r map[string]interface{}
         json.Unmarshal(b2,&r)
+        if filter["_id"] != nil{
+            filter["_id"] =bson.ObjectIdHex( filter["_id"].(string) )
+        }
         models.Update(uri,db,c,filter,r)
         this.Redirect("/", 302)
 }
@@ -101,6 +104,10 @@ func (this *RemoveController) Post(){
         b := []byte(s1)
         var r map[string]interface{}
         json.Unmarshal(b,&r)
+        if r["_id"] != nil{
+            r["_id"] =bson.ObjectIdHex( r["_id"].(string) ) 
+        }
+        //print(s1,r["_id"].(bson.ObjectId).String())
         models.Remove(uri,db,c,r)
         this.Redirect("/", 302)
 }
